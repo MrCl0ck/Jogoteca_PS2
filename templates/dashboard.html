@@ -1,0 +1,49 @@
+{% extends 'template.html' %}
+{% block conteudo %}
+    <section class="container">
+        <h2>Seu Dashboard</h2>
+        <section class="float-left">
+            <p>
+                <label>Nome: {{ nome }}</label>
+            </p>
+            <p>
+                <label>E-mail: {{ email }}</label>
+            </p>
+            <p>
+                <label>Data de criação: {{ data }}</label>
+            </p>
+            <p>
+                <label>Jogo favorito: {{ jogo }}, Exp: {{ jogo.experiencia }}, Tempo jogado: {{ jogo.tempo }} </label>
+            </p>
+            <p>
+                <label>Nível: {{ nível }}</label>
+            </p>
+        </section>  
+        <section class="float-right">
+            <h3>+ Jogos +</h3>
+            <h4>TOP 5:</h4>
+            <table class="table table-striped table-responsive table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Console</th>
+                        <th>Popularidade</th>
+                        <th>Categoria</th>
+                        <th>Data de criação</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for jogo in jogos %}
+                    <tr>
+                        <td>{{ jogo.nome }}</td>
+                        <td>{{ jogo.console }}</td>
+                        <td>{{ jogo.popularidade }}</td>
+                        <td>{{ jogo.categoria }}</td>
+                        <td>{{ jogo.data }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>      
+        </section>
+    </section>
+{% endblock %}
