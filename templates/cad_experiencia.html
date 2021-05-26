@@ -1,0 +1,19 @@
+{% extends 'template.html' %}
+{% block conteudo %}
+
+<div class="container">
+    <form class="form-group" method="POST" action="pagina_a_redirecionar">
+        <p>
+            <label>Pontos:</label>
+            <input class="form-control" type="number" name="pontos" required>
+        </p>
+        <p>
+            <label>Tempo jogado:</label>
+            <input class="form-control" type="time" name="tempo" required>
+        </p>
+        <button class="btn btn-primary" type="submit">Adicionar</button>
+    </form>
+</div>
+
+
+{% endblock %}
