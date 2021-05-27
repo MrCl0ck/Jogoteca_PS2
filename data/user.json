@@ -1,3 +1,13 @@
 {
-    
+    "usuarios":[
+        {
+            "nome": "fulano",
+            "email": "fulando@f.com.br",
+            "data": "27-05-2021",
+            "jogos": {
+
+            },
+            "nivel": "Noob"
+        }
+    ]
 }

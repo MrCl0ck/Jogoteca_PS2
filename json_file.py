@@ -1,4 +1,5 @@
 import json
+from usuario import Usuario
 
 class GeralJSON:
     def ler(caminho):
@@ -9,8 +10,6 @@ class GeralJSON:
         with open(caminho, 'a') as f:
             return json.dump(objeto, f)
 
-    def ver_json(caminho):
-        print(GeralJSON.ler(caminho))
 
 class LoginJSON:
     def ler(caminho):
@@ -25,5 +24,12 @@ class LoginJSON:
             banco_usuario[email] = senha
             return json.dump(banco_usuario, f)
 
-    def ver_json(caminho):
-        print(LoginJSON.ler(caminho))
+
+class UsuarioJSON:
+    def ler(caminho):
+        with open(caminho, 'r') as f:
+            return json.load(f)
+
+    def escrever(usuario: Usuario, caminho):
+        with open(caminho, 'w') as f:
+            pass
