@@ -8,5 +8,6 @@ class Usuario(BaseModel):
     email: str
     data: str = str(datetime.now().date()) #Data atual
     jogos: Any = "Você não tem nenhum jogo adicionado!"
-    nível: str = 'Noob'
+    nivel: str = 'Noob'
+    pontos: int = 0
 

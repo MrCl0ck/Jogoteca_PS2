@@ -18,11 +18,11 @@ class LoginJSON:
 
     def escrever(email, senha, caminho):
         #Lê o banco antes do método open, pois como o modo está write e ele apaga tudo quando o método open é chamado
-        banco_usuario = LoginJSON.ler(caminho)
+        banco_login = LoginJSON.ler(caminho)
         with open(caminho, 'w') as f:
             #Insere o email na chave e no valor coloca a senha, ambos passados por parâmetro
-            banco_usuario[email] = senha
-            return json.dump(banco_usuario, f)
+            banco_login[email] = senha
+            return json.dump(banco_login, f)
 
 
 class UsuarioJSON:
@@ -31,5 +31,8 @@ class UsuarioJSON:
             return json.load(f)
 
     def escrever(usuario: Usuario, caminho):
+        banco_user = UsuarioJSON.ler(caminho)
         with open(caminho, 'w') as f:
-            pass
+            banco_user['usuarios'].append(usuario.dict(include={'nome', 'email', 'data', 'jogos', 'nivel', 'pontos'}))
+            print(banco_user)
+            return json.dump(banco_user, f)
