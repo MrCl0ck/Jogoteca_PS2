@@ -1,4 +1,4 @@
-from os import remove
+from login import deletar_login
 from json_file import UsuarioJSON
 from typing import Any
 from datetime import datetime
@@ -34,8 +34,8 @@ def listar_usuarios():
     usuarios = UsuarioJSON.ler(__banco_user)
     usuarios = usuarios["usuarios"] #Essa chave é usada, pois dentro dessa chave há um valor onde é armazenado uma lista com todos os usuários 
     for user in usuarios:
-        for chave in user:
-            print(chave,":",user[chave])
+        for chave, valor in user.items():
+            print(chave,":",valor)
 
 @app.post("/private/users")
 def criar_usuario(email_p: str, nome_p: str):
@@ -48,4 +48,5 @@ def deletar_usuario(email: str):
     if(usuario == None):
         return "Este usuário não existe!"
 
-    UsuarioJSON.deletar(usuario, __banco_user)
+    UsuarioJSON.deletar(usuario, __banco_user)# Deleta do banco user todo os valores relacionados a aquele usuário
+    deletar_login(email)# Deleta do banco login o email e a senha daquele usuário

@@ -15,13 +15,13 @@ class Login(BaseModel):
     email: str
 
 #Validação de dados (email, pois o email é o login!)
-def validar(email: str):
+def retornar_login(email: str):
     logins = LoginJSON.ler(__banco_login)
     for login, senha in logins.items():
         if(login == email):
-            return "E-mail já existente!"
+            return {login:senha} #retorna um dicionário, que é o "login/email" na chave e a "senha" no valor da chave
 
-    return "E-mail disponível!"
+    return None
 
 #Faz a autenticação do login e senha passados
 def autenticar(email:str, senha: str):
@@ -38,14 +38,22 @@ def autenticar(email:str, senha: str):
      
 #Criação e inserção de um login e senha no banco de dados
 def criar_login(email: str, senha: str, nome: str):
-    if(validar(email) == "E-mail já existente!"):
+    if(retornar_login(email) != None):
         return "E-mail já existente!"
 
     LoginJSON.escrever(email, senha, __banco_login)
-    criar_usuario(Usuario(nome=nome, email=email)) #Método do arquivo usuario.py
+    criar_usuario(Usuario(email, senha)) #Método do arquivo usuario.py
 
     return "Usuário cadastrado com sucesso!"
     
+#Deletar um login e senha do banco de dados
+def deletar_login(email: str):
+    login = retornar_login(email)
+
+    if(login == None):
+        return "Este usuário não existe!"
+
+    LoginJSON.deletar(login, __banco_login)
 
 
 
