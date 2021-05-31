@@ -41,7 +41,7 @@ class UsuarioJSON:
         #Caso a escolha seja acrescentar um usuário ao banco de dados
         banco_user = UsuarioJSON.ler(caminho)
         with open(caminho, 'w') as f:
-            banco_user['usuarios'].append(usuario)
+            banco_user['usuarios'].append(usuario.dict(include={"nome", "email", "data", "jogos", "nivel", "pontos"}))
             print(banco_user)
             return json.dump(banco_user, f)
         

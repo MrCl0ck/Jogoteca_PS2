@@ -1,9 +1,7 @@
-from login import deletar_login
+import login
 from json_file import UsuarioJSON
-from typing import Any
 from datetime import datetime
 from fastapi import FastAPI
-
 from pydantic.main import BaseModel
 
 app = FastAPI()
@@ -15,7 +13,7 @@ class Usuario(BaseModel):
     nome: str
     email: str
     data: str = str(datetime.now().date()) #Data atual
-    jogos: Any = "Você não tem nenhum jogo adicionado!"
+    jogos: str = "Você não tem nenhum jogo adicionado!"
     nivel: str = 'Noob'
     pontos: int = 0
 
@@ -38,8 +36,8 @@ def listar_usuarios():
             print(chave,":",valor)
 
 @app.post("/private/users")
-def criar_usuario(email_p: str, nome_p: str):
-    UsuarioJSON.escrever(Usuario(nome=nome_p, email=email_p),__banco_user)
+def criar_usuario(nome: str, email: str):
+    UsuarioJSON.escrever(Usuario(nome=nome, email=email),__banco_user)
 
 @app.delete("/private/users/{email}")
 def deletar_usuario(email: str):
@@ -49,4 +47,4 @@ def deletar_usuario(email: str):
         return "Este usuário não existe!"
 
     UsuarioJSON.deletar(usuario, __banco_user)# Deleta do banco user todo os valores relacionados a aquele usuário
-    deletar_login(email)# Deleta do banco login o email e a senha daquele usuário
+    login.deletar_login(email)# Deleta do banco login o email e a senha daquele usuário

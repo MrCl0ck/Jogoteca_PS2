@@ -1,9 +1,8 @@
 from typing import Any
-from usuario import Usuario, criar_usuario
+import usuario 
 from json_file import LoginJSON, UsuarioJSON
 from fastapi import FastAPI
 from pydantic import BaseModel
-import usuario
 
 #Caminho para o banco de dados dos logins e senhas cadastrados
 __banco_login = "./data/login.json"
@@ -41,8 +40,10 @@ def criar_login(email: str, senha: str, nome: str):
     if(retornar_login(email) != None):
         return "E-mail já existente!"
 
-    LoginJSON.escrever(email, senha, __banco_login)
-    criar_usuario(Usuario(email, senha)) #Método do arquivo usuario.py
+    login = {email:senha}
+
+    LoginJSON.escrever(login, __banco_login)
+    usuario.criar_usuario(nome, email) #Método do arquivo usuario.py
 
     return "Usuário cadastrado com sucesso!"
     
