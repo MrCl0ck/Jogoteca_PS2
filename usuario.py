@@ -35,6 +35,8 @@ def listar_usuarios():
         for chave, valor in user.items():
             print(chave,":",valor)
 
+    return usuarios
+
 @app.post("/private/users")
 def criar_usuario(nome: str, email: str):
     UsuarioJSON.escrever(Usuario(nome=nome, email=email),__banco_user)
