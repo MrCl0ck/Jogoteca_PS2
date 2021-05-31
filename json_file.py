@@ -30,9 +30,18 @@ class UsuarioJSON:
         with open(caminho, 'r') as f:
             return json.load(f)
 
-    def escrever(usuario: Usuario, caminho):
+    def escrever(usuario: Usuario, caminho, chave = 1):
+        #Caso a escolha seja acrescentar um usuário ao banco de dados
         banco_user = UsuarioJSON.ler(caminho)
         with open(caminho, 'w') as f:
             banco_user['usuarios'].append(usuario.dict(include={'nome', 'email', 'data', 'jogos', 'nivel', 'pontos'}))
+            print(banco_user)
+            return json.dump(banco_user, f)
+        
+    def deletar(usuario: Usuario, caminho):
+        #Caso a escolha seja deletar um usuário ao banco de dados
+        banco_user = UsuarioJSON.ler(caminho)
+        banco_user['usuarios'].remove(usuario)
+        with open(caminho, 'w') as f:
             print(banco_user)
             return json.dump(banco_user, f)
