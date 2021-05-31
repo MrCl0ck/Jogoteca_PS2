@@ -1,12 +1,12 @@
-from typing import Any
 import usuario 
-from json_file import LoginJSON, UsuarioJSON
+from json_file import LoginJSON
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+app = FastAPI()
+
 #Caminho para o banco de dados dos logins e senhas cadastrados
 __banco_login = "./data/login.json"
-
 
 #Modelo da classe Login
 class Login(BaseModel):
@@ -23,6 +23,7 @@ def retornar_login(email: str):
     return None
 
 #Faz a autenticação do login e senha passados
+#FALTA - ROTA AUTENTICAR
 def autenticar(email:str, senha: str):
     logins = LoginJSON.ler(__banco_login)
     for login, senha_login in logins.items():
@@ -36,13 +37,12 @@ def autenticar(email:str, senha: str):
 
      
 #Criação e inserção de um login e senha no banco de dados
+#FALTA - ROTA CRIAR LOGIN
 def criar_login(email: str, senha: str, nome: str):
     if(retornar_login(email) != None):
         return "E-mail já existente!"
 
-    login = {email:senha}
-
-    LoginJSON.escrever(login, __banco_login)
+    LoginJSON.escrever(Login(email= email, senha= senha), __banco_login)
     usuario.criar_usuario(nome, email) #Método do arquivo usuario.py
 
     return "Usuário cadastrado com sucesso!"
