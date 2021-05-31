@@ -13,12 +13,14 @@ class Login(BaseModel):
     nome: str
     email: str
 
+#Retornar um usuário
 #Validação de dados (email, pois o email é o login!)
 def retornar_login(email: str):
     logins = LoginJSON.ler(__banco_login)
-    for login, senha in logins.items():
-        if(login == email):
-            return {login:senha} #retorna um dicionário, que é o "login/email" na chave e a "senha" no valor da chave
+    logins = logins["logins"]
+    for cadastro in logins:
+        if(email in cadastro):
+            return cadastro #retorna um dicionário, que é o "login/email" na chave e a "senha" no valor da chave
 
     return None
 
@@ -37,7 +39,7 @@ def autenticar(email:str, senha: str):
 
      
 #Criação e inserção de um login e senha no banco de dados
-#FALTA - ROTA CRIAR LOGIN
+@app.post("private/users")
 def criar_login(email: str, senha: str, nome: str):
     if(retornar_login(email) != None):
         return "E-mail já existente!"

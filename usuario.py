@@ -37,9 +37,9 @@ def listar_usuarios():
 
     return usuarios
 
-@app.post("/private/users")
 def criar_usuario(nome: str, email: str):
     UsuarioJSON.escrever(Usuario(nome=nome, email=email),__banco_user)
+    return "Usuário criado com sucesso!"
 
 @app.delete("/private/users/{email}")
 def deletar_usuario(email: str):
@@ -50,3 +50,5 @@ def deletar_usuario(email: str):
 
     UsuarioJSON.deletar(usuario, __banco_user)# Deleta do banco user todo os valores relacionados a aquele usuário
     login.deletar_login(email)# Deleta do banco login o email e a senha daquele usuário
+
+    return "Usuário deletado com sucesso!"
