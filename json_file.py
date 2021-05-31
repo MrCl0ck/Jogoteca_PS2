@@ -21,7 +21,7 @@ class LoginJSON:
         banco_login = LoginJSON.ler(caminho)
         with open(caminho, 'w') as f:
             #Insere o email na chave e no valor coloca a senha, ambos passados por parâmetro
-            banco_login["logins"].append(login.dict(include={"email"}))
+            banco_login["logins"].append(login.dict(include={"email", "senha"}))
             return json.dump(banco_login, f)
 
     def deletar(login: dict, caminho):

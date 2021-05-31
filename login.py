@@ -18,9 +18,10 @@ class Login(BaseModel):
 def retornar_login(email: str):
     logins = LoginJSON.ler(__banco_login)
     logins = logins["logins"]
-    for cadastro in logins:
-        if(email in cadastro):
-            return cadastro #retorna um dicionário, que é o "login/email" na chave e a "senha" no valor da chave
+    for login in logins:
+        for chave, valor in login.items():
+            if(valor == email):
+                return login #retorna um dicionário, que é o "login/email" na chave e a "senha" no valor da chave
 
     return None
 
