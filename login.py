@@ -10,8 +10,8 @@ __banco_login = "./data/login.json"
 
 #Modelo da classe Login
 class Login(BaseModel):
-    nome: str
     email: str
+    senha: str
 
 #Retornar um usuário
 #Validação de dados (email, pois o email é o login!)
@@ -39,12 +39,12 @@ def autenticar(email:str, senha: str):
 
      
 #Criação e inserção de um login e senha no banco de dados
-@app.post("private/users")
+@app.post("/private/users")
 def criar_login(email: str, senha: str, nome: str):
     if(retornar_login(email) != None):
         return "E-mail já existente!"
 
-    LoginJSON.escrever(Login(email= email, senha= senha), __banco_login)
+    LoginJSON.escrever(Login(email=email, senha=senha), __banco_login)
     usuario.criar_usuario(nome, email) #Método do arquivo usuario.py
 
     return "Usuário cadastrado com sucesso!"
