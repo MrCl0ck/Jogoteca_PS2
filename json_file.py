@@ -32,6 +32,27 @@ class LoginJSON:
             print(banco_login)
             return json.dump(banco_login, f)
 
+class JogosJSON:
+    def ler(caminho):
+        with open(caminho, 'r') as f:
+            return json.load(f)
+
+    def escrever(jogo: dict, caminho):
+        #Caso a escolha seja acrescentar um jogo ao banco de dados
+        banco_jogos = UsuarioJSON.ler(caminho)
+        with open(caminho, 'w') as f:
+            banco_jogos['jogos'].append(jogo.dict(include={"nome", "console", "popularidade", "categoria", "data"}))
+            print(banco_jogos)
+            return json.dump(banco_jogos, f)
+        
+    def deletar(jogo: dict, caminho):
+        #Caso a escolha seja deletar um jogo do banco de dados
+        banco_jogos = UsuarioJSON.ler(caminho)
+        banco_jogos['jogos'].remove(jogo)
+        with open(caminho, 'w') as f:
+            print(banco_jogos)
+            return json.dump(banco_jogos, f)
+
 class UsuarioJSON:
     def ler(caminho):
         with open(caminho, 'r') as f:

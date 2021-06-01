@@ -14,11 +14,12 @@ class Login(BaseModel):
     senha: str
 
 #Retornar um usuário
-#Validação de dados (email, pois o email é o login!)
+#Validação de dados (email, pois o email é o login!) Sem diferença de maiúsculas e minúsculas
 def retornar_login(email: str):
-    logins = LoginJSON.ler(__banco_login)
-    logins = logins["logins"]
-    for login in logins:
+    email = email.lower()
+    base_de_dados = LoginJSON.ler(__banco_login)
+    base_de_dados = base_de_dados["logins"]
+    for login in base_de_dados:
         for chave, valor in login.items():
             if(valor == email):
                 return login #retorna um dicionário, que é o "login/email" na chave e a "senha" no valor da chave
@@ -28,8 +29,8 @@ def retornar_login(email: str):
 #Faz a autenticação do login e senha passados
 #FALTA - ROTA AUTENTICAR
 def autenticar(email:str, senha: str):
-    logins = LoginJSON.ler(__banco_login)
-    for login, senha_login in logins.items():
+    base_de_dados = LoginJSON.ler(__banco_login)
+    for login, senha_login in base_de_dados.items():
         if(login == email):
             if(senha_login == senha):
                 return "Logando..."
