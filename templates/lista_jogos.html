@@ -1,0 +1,49 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<section class="container">
+    <div class="container">
+        <p><h6>Navegação</h6></p>
+        <nav class="navbar">
+            <form class="nav-link" action="{{ url_for('login_page') }}">
+                <button class="btn btn-primary" type="submit">Fazer login</button>
+            </form>   
+            <form class="nav-link" action="{{ url_for('login_page') }}">
+                <button class="btn btn-primary" type="submit">Voltar ao Dashboard</button>
+            </form>
+        </nav>
+    </div>
+        
+    <h4>Sejam bem-vindos ao site!</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla, quam at sollicitudin varius, lorem justo maximus magna, convallis rutrum dui augue at lacus. Integer non pulvinar nibh. Aliquam iaculis lacinia orci eu efficitur. Donec vel enim at felis posuere molestie id ac mauris. Mauris et ultrices diam. Aenean vitae ex eu ligula vestibulum rhoncus. Donec vitae ligula egestas, vestibulum est quis, accumsan odio. Ut tempus accumsan euismod. Nullam ac quam ullamcorper, auctor odio ac, interdum nibh. Suspendisse pulvinar augue tortor, sed bibendum lectus hendrerit at. Maecenas ex risus, vulputate vel volutpat a, vulputate at lorem.</p>
+    <p>Fusce elementum dignissim leo, ac ultrices lacus blandit a. Etiam a ex orci. Aliquam erat volutpat. Donec lacinia quis mi in tristique. Aliquam a congue lectus. In vel velit id metus sodales cursus. Praesent pulvinar euismod arcu ut aliquam. Ut in mauris semper, semper dui at, imperdiet purus. Pellentesque ac consectetur nulla. Etiam quis vestibulum diam.</p>
+    <p>Aliquam eget rhoncus nulla. Maecenas vel erat vitae dolor ullamcorper varius. Sed bibendum lacus id enim gravida, sed ultricies nisi pellentesque. Morbi eget nisi vel diam imperdiet viverra imperdiet quis leo. Donec nec leo eget augue porttitor tempor id eget est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce convallis magna sit amet elit dignissim, vitae sollicitudin nulla tempus. Fusce et eros elementum, malesuada ligula blandit, malesuada est. Sed facilisis urna neque, nec finibus turpis blandit a. Maecenas vestibulum magna a libero congue, sit amet ultricies mi lacinia. Quisque id accumsan ligula, consequat porttitor justo. Nulla nec semper justo, in faucibus tellus.</p>
+    <p>Integer fringilla metus non ex interdum volutpat. Proin quis fringilla lorem. Phasellus rhoncus ornare turpis, non facilisis dolor rutrum vitae. Sed ut scelerisque magna. Nullam ornare neque a metus ullamcorper tristique. Nunc ac nisl at ipsum semper feugiat ut et tortor. Sed ullamcorper condimentum tempus. Curabitur sollicitudin eros nec nulla efficitur, non mattis mauris aliquet. Donec suscipit, leo nec accumsan tincidunt, enim ligula elementum ipsum, vel pretium neque erat eu odio.</p>
+    <p>Donec consequat sem ut velit tincidunt, sit amet facilisis mi consequat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tincidunt nec mauris a porttitor. Sed sapien urna, suscipit id leo nec, sollicitudin fringilla nunc. Vestibulum a urna tempus est ullamcorper accumsan. Morbi vulputate non metus vitae posuere. Curabitur nec malesuada erat. Aliquam erat volutpat. Duis facilisis eu elit id rutrum. Nunc semper lobortis nibh, eget vulputate arcu feugiat porta. Quisque vestibulum consectetur quam ac aliquet. Sed finibus nisi non nulla condimentum, id fermentum ligula scelerisque. Praesent ut finibus eros.</p>
+    <br/>
+    <h5>Confira a lista de jogos abaixo:</h5> 
+
+    <table class="table table-striped table-responsive table-bordered">
+        <thead class="thead-default">
+            <tr>
+                <th>Nome</th>
+                <th>Console</th>
+                <th>Popularidade</th>
+                <th>Categoria</th>
+                <th>Data de criação</th>                        
+            </tr>
+        </thead>
+        <tbody>
+        {% for jogo in lista %}
+            <tr>
+                <td>{{ jogo.nome.title() }}</td>
+                <td>{{ jogo.console }}</td>
+                <td>{{ jogo.popularidade }}</td>
+                <td>{{ jogo.categoria }}</td>
+                <td>{{ jogo.data }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>      
+    
+</section>
+{% endblock %}

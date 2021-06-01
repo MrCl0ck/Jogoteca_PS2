@@ -8,11 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>Faça o seu login:</h1>
-        <form method="POST" action="pagina_a_redirecionar">
+        <p><h2>Login - Jogoteca - PS2</h2></p>
+
+        <p>
+            <h5>Faça o seu login:</h5>
+        </p>
+        <form method="POST" action="{{ url_for('autenticar') }}">
             <p>
-                <label>Login:</label>
-                <input type="text" class="form-control" name="usuario" required>
+                <label>Email:</label>
+                <input type="text" class="form-control" name="email" required>
             </p>
             <p>
                 <label>Senha:</label>

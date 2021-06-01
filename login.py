@@ -27,21 +27,20 @@ def retornar_login(email: str):
     return None
 
 #Faz a autenticação do login e senha passados
-#FALTA - ROTA AUTENTICAR
 def autenticar(email:str, senha: str):
     base_de_dados = LoginJSON.ler(__banco_login)
-    for login, senha_login in base_de_dados.items():
-        if(login == email):
-            if(senha_login == senha):
+    base_de_dados = base_de_dados["logins"]
+    for login in base_de_dados:
+        if(login["email"] == email):
+            if(login["senha"] == senha):
                 return "Logando..."
             else:
-                return "E-mail e/ou senha incorretos!"
+                return "Email e/ou senha incorretos!"
         else:
-            return "Este e-mail não existe!"
+            return "Email e/ou senha incorretos!"
 
      
 #Criação e inserção de um login e senha no banco de dados
-@app.post("/private/users")
 def criar_login(email: str, senha: str, nome: str):
     if(retornar_login(email) != None):
         return "E-mail já existente!"
