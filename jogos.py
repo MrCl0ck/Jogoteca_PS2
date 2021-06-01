@@ -29,6 +29,16 @@ def retornar_jogo(nome: str):
 
     return None
 
+#Este método retorna vários dicionários, com jogos e suas informações em cada um
+def retornar_jogos():
+    base_de_dados = JogosJSON.ler(__banco_jogos)
+    base_de_dados = base_de_dados["jogos"]
+    index = 0
+    for jogo in base_de_dados:
+        print("Jogo {} {}\n".format(index, jogo))
+        index+=1
+
+    return base_de_dados #Retorna a base de dados com todos os jogos que foram cadastrados até aqui
 
 #Criação e inserção de um jogo, e suas informações, no banco de dados
 #Rota para testes
