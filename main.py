@@ -1,9 +1,9 @@
-from flask import Flask, request
-from flask.helpers import flash
+from flask import Flask, request, session
 from flask.templating import render_template
 from flask_restful import Api, Resource
-import jogos
-import login
+from werkzeug.utils import redirect
+from flask.helpers import url_for
+import login, usuario, jogos
 
 app = Flask(__name__)
 app.secret_key = "jogotecaps2u.?"
@@ -12,7 +12,7 @@ api = Api(app)
 
 @app.get("/index")
 def index_page():
-    return render_template('lista_jogos.html', titulo="Jogoteca - PS2", lista = jogos.retornar_jogos())
+    return render_template('lista_jogos.html', titulo="Jogoteca - PS2", lista = jogos.retornar_jogos(), sessao = session)
 
 @app.get("/login")
 def login_page():
@@ -20,9 +20,21 @@ def login_page():
 
 @app.post("/autenticar")
 def autenticar():
-    flash(request.form["email"], request.form["senha"])
     res = login.autenticar(request.form["email"], request.form["senha"])
 
-    return res
+    if(res == None):
+        return "Email e/ou senha incorretos!"
+
+    return redirect(url_for('dashboard'))
+
+@app.get("/dashboard")
+def dashboard():
+    return render_template('dashboard.html', user = usuario.retornar_usuario(session['logado']))
+
+@app.get("/logout")
+def logout():
+    session["logado"] = None
+    #Mensagem para avisar que saiu!
+    return redirect(url_for("index_page"))
 
 app.run(debug=True)

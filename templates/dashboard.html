@@ -2,29 +2,47 @@
 {% block conteudo %}
     <section class="container">
         <h2>Seu Dashboard</h2>
-        <section class="float-left">
+        <nav class="navbar">
+            <form class="form-group nav-link" action="">
+                <button class="btn btn-primary">Adicionar Jogo</button>                
+            </form>
+            <form class="form-group nav-link" action="">
+                <button class="btn btn-primary">Adicionar Experiência</button>                
+            </form>
+            <form class="form-group nav-link" action="{{ url_for('index_page') }}">
+                <button class="btn btn-primary">Todos os Jogos</button>                
+            </form>
+            <form class="form-group nav-link" action="{{ url_for('logout') }}">
+                <button class="btn btn-secondary">Logout</button>
+            </form>
+        </nav>
+        <section class="container">
             <p>
-                <label>Nome: {{ nome }}</label>
+                <label class="fw-bold">Nome: </label> {{ user["nome"].title() }}
+
             </p>
             <p>
-                <label>E-mail: {{ email }}</label>
+                <label class="fw-bold">E-mail: </label> {{ user["email"] }}
             </p>
             <p>
-                <label>Data de criação: {{ data }}</label>
+                <label class="fw-bold">Data de criação da conta: </label> {{ user["data"] }}
             </p>
             <p>
-                <label>Jogo favorito: {{ jogo }}, Exp: {{ jogo.experiencia }}, Tempo jogado: {{ jogo.tempo }} </label>
+                <label class="fw-bold">Jogo favorito: </label>
+                <p>
+                    {{ user["jogos"] }}, Exp: {{ user["jogos"].experiencia }}, Tempo jogado: {{ user["jogos"].tempo }} 
+                </p>
             </p>
             <p>
-                <label>Pontos: {{ pontos }}</label>
+                <label class="fw-bold">Pontos: </label> {{ user["pontos"] }}
             </p>
             <p>
-                <label>Nível: {{ nível }}</label>
+                <label class="fw-bold">Nível: </label> {{ user["nível"] }}
             </p>
         </section>  
-        <section class="float-right">
-            <h3>+ Jogos +</h3>
-            <h4>TOP 5:</h4>
+        <section class="container">
+            <p><h3> Jogos Cadastrados: </h3></p>
+            <p><h4>TOP 5</h4></p>
             <table class="table table-striped table-responsive table-bordered">
                 <thead class="thead-default">
                     <tr>
@@ -47,17 +65,6 @@
                 {% endfor %}
                 </tbody>
             </table>      
-        </section>
-        <section class="float-none">
-            <form class="form-group" action="" method="POST">
-                <button class="btn btn-primary">Adicionar Experiência</button>                
-            </form>
-            <form class="form-group" action="" method="POST">
-                <button class="btn btn-primary">Todos os Jogos</button>                
-            </form>
-            <form class="form-group" action="" method="POST">
-                <button class="btn btn-secondary">Logout</button>
-            </form>
         </section>
     </section>
 {% endblock %}

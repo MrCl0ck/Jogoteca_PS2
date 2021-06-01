@@ -1,4 +1,5 @@
-import usuario 
+import usuario
+from flask import session
 from json_file import LoginJSON
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -33,11 +34,12 @@ def autenticar(email:str, senha: str):
     for login in base_de_dados:
         if(login["email"] == email):
             if(login["senha"] == senha):
-                return "Logando..."
+                session['logado'] = email
+                return login
             else:
-                return "Email e/ou senha incorretos!"
+                return None
         else:
-            return "Email e/ou senha incorretos!"
+            return None
 
      
 #Criação e inserção de um login e senha no banco de dados
