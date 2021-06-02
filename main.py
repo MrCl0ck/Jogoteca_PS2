@@ -1,3 +1,4 @@
+from datetime import timedelta
 from flask import Flask, request, session
 from flask.templating import render_template
 from flask_restful import Api, Resource
@@ -9,10 +10,18 @@ app = Flask(__name__)
 app.secret_key = "jogotecaps2u.?"
 api = Api(app)
 
+@app.get("/sessao")
+def retornar_sessao():
+    return session.get("logado", "não logado")#Caso exista a chave "logado" ele irá retornar esse valor dentro da chave. Caso não exista a chave "logado" ele irá retornar "não logado"
+    
 
+    
+
+
+@app.get("/")
 @app.get("/index")
 def index_page():
-    return render_template('lista_jogos.html', titulo="Jogoteca - PS2", lista = jogos.retornar_jogos(), sessao = session)
+    return render_template('lista_jogos.html', titulo="Jogoteca - PS2", lista = jogos.retornar_jogos(), sessao = retornar_sessao())
 
 @app.get("/login")
 def login_page():

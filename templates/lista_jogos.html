@@ -7,9 +7,9 @@
             <form class="nav-link" action="{{ url_for('login_page') }}">
                 <button class="btn btn-primary" type="submit">Fazer login</button>
             </form>   
-            {% if sessao["logado"] != none %}
+            {% if sessao != "não logado" %}
             <form class="nav-link" action="{{ url_for('dashboard') }}">
-                {{sessao["logado"]}}
+                Sessão: {{sessao}}, Usuário: {{sessao["logado"]}}
                 <button class="btn btn-primary" type="submit">Voltar ao Dashboard</button>
             </form>
             {% endif %}
