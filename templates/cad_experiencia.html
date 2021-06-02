@@ -2,10 +2,13 @@
 {% block conteudo %}
 
 <div class="container">
-    <form class="form-group" method="POST" action="pagina_a_redirecionar">
+    <form action="{{ url_for('dashboard') }}">
+        <button class="btn btn-secondary" type="submit">Voltar</button>
+    </form>
+    <form class="form-group" method="POST" action="{{ url_for('dashboard') }}">
         <p>
             <label>Pontos:</label>
-            <input class="form-control" type="number" name="pontos" required>
+            <input class="form-control" min="1" max="1000" type="number" name="pontos" required>
         </p>
         <p>
             <label>Tempo jogado:</label>
