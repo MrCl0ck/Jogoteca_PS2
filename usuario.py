@@ -25,6 +25,15 @@ def retornar_usuario(email: str):
         if(user["email"] == email):
             return user
 
+    return retornar_admin(email)
+
+def retornar_admin(email: str):
+    admins = UsuarioJSON.ler(__banco_user)
+    admins = admins["admins"]
+    for admin in admins:
+        if(admin["email"] == email):
+            return admin
+
     return None
 
 @app.get("/private/users")

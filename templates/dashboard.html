@@ -1,6 +1,7 @@
 {% extends 'template.html' %}
 {% block conteudo %}
     <section class="container">
+        {% if not admin %}
         <h2>Seu Dashboard</h2>
         <nav class="navbar">
             <form class="form-group nav-link" action="{{ url_for('cadastrar_jogo_usuario_page') }}">
@@ -66,5 +67,45 @@
                 </tbody>
             </table>      
         </section>
+        {% endif %}
+
+        {% if admin %}
+        <h2>Admin Control</h2>
+        <nav class="navbar">
+            <form class="form-group nav-link" action="{{ url_for('cadastrar_jogo_page') }}">
+                <button class="btn btn-primary">Adicionar Jogo ao Banco de Dados</button>                
+            </form>
+            <form class="form-group nav-link" action="{{ url_for('index_page') }}">
+                <button class="btn btn-primary">Página Principal</button>                
+            </form>
+            <form class="form-group nav-link" action="{{ url_for('logout') }}">
+                <button class="btn btn-secondary">Logout</button>
+            </form>
+        </nav>
+        <section class="container">
+            <p>
+                <label class="fw-bold">Nome: </label> {{ user["nome"].title() }}
+
+            </p>
+            <p>
+                <label class="fw-bold">E-mail: </label> {{ user["email"] }}
+            </p>
+            <p>
+                <label class="fw-bold">Data de criação da conta: </label> {{ user["data"] }}
+            </p>
+            <p>
+                <label class="fw-bold">Jogo favorito: </label>
+                <p>
+                    {{ user["jogos"] }}, Exp: {{ user["jogos"].experiencia }}, Tempo jogado: {{ user["jogos"].tempo }} 
+                </p>
+            </p>
+            <p>
+                <label class="fw-bold">Pontos: </label> {{ user["pontos"] }}
+            </p>
+            <p>
+                <label class="fw-bold">Nível: </label> {{ user["nivel"] }}
+            </p>
+        </section>    
+        {% endif %}  
     </section>
 {% endblock %}

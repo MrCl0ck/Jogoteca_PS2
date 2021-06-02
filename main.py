@@ -60,15 +60,36 @@ def autenticar():
 
 @app.get("/dashboard")
 def dashboard():
-    return render_template('dashboard.html', user = usuario.retornar_usuario(retornar_sessao()))
+    return render_template('dashboard.html', user = usuario.retornar_usuario(retornar_sessao()), admin = usuario.retornar_admin(retornar_sessao()))
     
-@app.get("/cadastrar_jogo")
+@app.get("/cadastrar_jogo_usuario")
 def cadastrar_jogo_usuario_page():
     return render_template('add_jogo_usuario.html', lista = jogos.retornar_jogos(), titulo="Adicionar Jogo a minha conta")
 
-@app.get("/autenticar_cadastrar_jogo")
+@app.get("/autenticar_cadastrar_jogo_usuario")
 def cadastrar_jogo_usuario():
     pass
+
+@app.get("/admin/cadastrar_jogo")
+def cadastrar_jogo_page():
+    return render_template('cad_jogo.html', titulo="Adicionar Jogo ao Banco De Dados")
+
+@app.post("/admin/autenticar_cadastrar_jogo")
+def cadastrar_jogo():
+    jogo = {
+        "nome": request.form["nome"],
+        "popularidade": request.form["popularidade"],
+        "categoria": request.form["categoria"],
+        "data": request.form["data"]
+    }
+    res = jogos.cadastrar_jogo(jogo)
+    
+    if(res == "Este jogo já existe!"):
+        flash(res, "error")
+        return redirect(url_for('cadastrar_jogo_page'))
+
+    flash(res, "success")
+    return redirect(url_for('dashboard'))
 
 @app.get("/cadastrar_experiencia")
 def experiencia_page():
@@ -81,7 +102,7 @@ def cadastrar_experiencia():
 @app.get("/logout")
 def logout():
     session.clear()
-    #Mensagem para avisar que saiu!
+    flash("Você deslogou com sucesso!", "success")
     return redirect(url_for("index_page"))
 
 app.run(debug=True)

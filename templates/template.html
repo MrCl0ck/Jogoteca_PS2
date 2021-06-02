@@ -8,10 +8,6 @@
 </head>
 <body>
     <div class="container">
-        <p></p>
-        <h1>{{ titulo }}</h1>
-        <p></p>
-        
         {% for message in get_flashed_messages(category_filter=["success"]) %}
         {% if message %}
         <div class="alert alert-success fade" role="success">
@@ -27,6 +23,11 @@
         </div>
         {% endif %}
         {% endfor %}
+        
+        <p></p>
+        <h1>{{ titulo }}</h1>
+        <p></p>
+        
 
         {% block conteudo %}
         
