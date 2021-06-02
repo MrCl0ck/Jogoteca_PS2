@@ -3,14 +3,14 @@
     <section class="container">
         <h2>Seu Dashboard</h2>
         <nav class="navbar">
-            <form class="form-group nav-link" action="">
+            <form class="form-group nav-link" action="{{ url_for('cadastrar_jogo_usuario_page') }}">
                 <button class="btn btn-primary">Adicionar Jogo</button>                
             </form>
-            <form class="form-group nav-link" action="{{ url_for('experiencia') }}">
+            <form class="form-group nav-link" action="{{ url_for('experiencia_page') }}">
                 <button class="btn btn-primary">Adicionar Experiência</button>                
             </form>
             <form class="form-group nav-link" action="{{ url_for('index_page') }}">
-                <button class="btn btn-primary">Todos os Jogos</button>                
+                <button class="btn btn-primary">Página Principal</button>                
             </form>
             <form class="form-group nav-link" action="{{ url_for('logout') }}">
                 <button class="btn btn-secondary">Logout</button>
@@ -37,7 +37,7 @@
                 <label class="fw-bold">Pontos: </label> {{ user["pontos"] }}
             </p>
             <p>
-                <label class="fw-bold">Nível: </label> {{ user["nível"] }}
+                <label class="fw-bold">Nível: </label> {{ user["nivel"] }}
             </p>
         </section>  
         <section class="container">

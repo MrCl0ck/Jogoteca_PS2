@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
-    <title>Jogoteca PS2 - Cadastro de Usuário</title>
-</head>
-<body>
+{% extends 'template.html' %}
+{% block conteudo %}
     <div class="container">
-        <h1>Digite seus dados abaixo:</h1>
-        <h4>Cadastro de Usuário</h4>
-        <form method="POST" action="pagina_a_redirecionar">
+        <p>
+            <h1>Digite seus dados abaixo:</h1>
+            <h4>Cadastro de Usuário</h4>
+        </p>
+        <p>
+            <form action="{{ url_for('index_page') }}">
+                <button class="btn btn-secondary" type="submit">Voltar</button>
+            </form>
+        </p>
+        <form method="POST" action="{{ url_for('cadastrar_usuario') }}">
             <p>
                 <label>E-mail:</label>
-                <input type="text" class="form-control" name="email" required>
+                <input type="email" autocomplete="off" class="form-control" name="email" required>
             </p>
             <p>
                 <label>Senha:</label>
@@ -21,10 +21,9 @@
             </p>
             <p>
                 <label>Nome:</label>
-                <input type="text" class="form-control" name="senha" required>
+                <input type="text" autocomplete="off" class="form-control" name="nome" required>
             </p>
-            <button class="btn btn primary" type="submit">Cadastrar</button>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

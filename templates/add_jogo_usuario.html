@@ -1,0 +1,38 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<p>
+    <form action="{{ url_for('dashboard') }}">
+        <button class="btn btn-secondary" type="submit">Voltar</button>
+    </form>
+</p>
+<h5>Confira a lista de jogos abaixo:</h5> 
+
+    <table class="table table-striped table-responsive table-bordered">
+        <thead align="center" class="thead-default align-middle">
+            <tr>
+                <th>Nome</th>
+                <th>Console</th>
+                <th>Popularidade</th>
+                <th>Categoria</th>
+                <th>Data de criação</th>  
+                <th>Adicionar</th>                              
+            </tr>
+        </thead>
+        <tbody align="center" class="align-middle">
+        {% for jogo in lista %}
+            <tr>
+                <td>{{ jogo.nome.title() }}</td>
+                <td>{{ jogo.console }}</td>
+                <td>{{ jogo.popularidade }}</td>
+                <td>{{ jogo.categoria }}</td>
+                <td>{{ jogo.data }}</td>
+                <td class="col-auto">
+                    <form action="">
+                        <button class="btn btn-primary"><strong><h4>+</h4></strong></button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> 
+{% endblock %}

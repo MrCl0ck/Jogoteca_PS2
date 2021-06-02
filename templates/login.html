@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
-    <title>Login - PS2</title>
-</head>
-<body>
+{% extends 'template.html' %}
+{% block conteudo %}
     <div class="container">
         <p><h2>Login - Jogoteca - PS2</h2></p>
 
@@ -16,7 +9,7 @@
         <form method="POST" action="{{ url_for('autenticar') }}">
             <p>
                 <label>Email:</label>
-                <input type="text" class="form-control" name="email" required>
+                <input type="email" class="form-control" name="email" required>
             </p>
             <p>
                 <label>Senha:</label>
@@ -27,5 +20,4 @@
             </p>            
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'template.html' %}
 {% block conteudo %}
-
 <div class="container">
-    <form action="{{ url_for('dashboard') }}">
-        <button class="btn btn-secondary" type="submit">Voltar</button>
-    </form>
+    <p>
+        <form action="{{ url_for('dashboard') }}">
+            <button class="btn btn-secondary" type="submit">Voltar</button>
+        </form>
+    </p>
     <form class="form-group" method="POST" action="{{ url_for('dashboard') }}">
         <p>
             <label>Pontos:</label>

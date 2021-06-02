@@ -1,4 +1,1 @@
-{
-    "logins": [{"email": "levip@gmail.com", "senha": "12323115"}, {"email": "levip123@gmail.com", "senha": "55555555"}, {"email": "a@a.com.br", "senha": "151515"}],
-    "admins": [{"email":"admin@jogoteca.com.br", "senha": "jogo1ec477"}]
-}
+{"logins": [{"email": "levip@gmail.com", "senha": "12323115"}, {"email": "levip123@gmail.com", "senha": "55555555"}, {"email": "a@a.com.br", "senha": "151515"}, {"email": "jose@gmail.com", "senha": "258369"}, {"email": "base@gmail.com", "senha": "123456"}, {"email": "base2@gmail.com", "senha": "123456"}], "admins": [{"email": "admin@jogoteca.com.br", "senha": "jogo1ec477"}]}

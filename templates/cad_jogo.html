@@ -2,16 +2,21 @@
 {% block conteudo %}
 
 <section class="container">
-    <div class="form-group">
+    <div>
         <h1 class="title">Cadastre o jogo</h1>
-        <form method="POST" action="">
+        <p>
+            <form action="{{ url_for('dashboard') }}">
+                <button class="btn btn-secondary" type="submit">Voltar</button>
+            </form>
+        </p>
+        <form class="form-group" method="POST" action="">
             <p>
                 <label>Nome:</label>
                 <input class="form-control" type="text" name="nome" required>
             </p>
             <p>
                 <label>Console (PS2):</label>
-                <input class="form-control" type="radio" name="console" checked required>
+                <input class="form-check-input" type="radio" name="console" checked required>
             </p>
             <p>
                 <label>Popularidade:</label>

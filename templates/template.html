@@ -8,8 +8,26 @@
 </head>
 <body>
     <div class="container">
+        <p></p>
         <h1>{{ titulo }}</h1>
+        <p></p>
         
+        {% for message in get_flashed_messages(category_filter=["success"]) %}
+        {% if message %}
+        <div class="alert alert-success fade" role="success">
+            <strong>{{ message }}</strong>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for message in get_flashed_messages(category_filter=["error"]) %}
+        {% if message %}
+        <div class="alert alert-danger fade" role="danger">
+            <strong>{{ message }}</strong>
+        </div>
+        {% endif %}
+        {% endfor %}
+
         {% block conteudo %}
         
         {% endblock %}

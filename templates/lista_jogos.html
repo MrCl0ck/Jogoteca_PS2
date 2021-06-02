@@ -4,9 +4,20 @@
     <div class="container">
         <p><h6>Navegação</h6></p>
         <nav class="navbar">
-            <form class="nav-link" action="{{ url_for('login_page') }}">
-                <button class="btn btn-primary" type="submit">Fazer login</button>
-            </form>   
+            {% if sessao == "não logado" %}
+            <div class="container">
+                <p>
+                    <form class="nav-link" action="{{ url_for('login_page') }}">
+                    <h6>Já é cadastrado? faça login</h6>
+                        <button class="btn btn-primary" type="submit">Login</button>                
+                    </form>   
+                    <form class="nav-link" action="{{ url_for('cadastrar_usuario_page') }}">
+                        <h6>Ainda não é cadastrado? cadastre-se agora</h6>
+                        <button class="btn btn-primary" type="submit">Cadastrar</button>            
+                    </form>   
+                </p>
+            </div>
+            {% endif %}
             {% if sessao != "não logado" %}
             <form class="nav-link" action="{{ url_for('dashboard') }}">
                 Sessão: {{sessao}}, Usuário: {{sessao["logado"]}}
@@ -26,16 +37,16 @@
     <h5>Confira a lista de jogos abaixo:</h5> 
 
     <table class="table table-striped table-responsive table-bordered">
-        <thead class="thead-default">
+        <thead align="center" class="thead-default align-middle">
             <tr>
                 <th>Nome</th>
                 <th>Console</th>
                 <th>Popularidade</th>
                 <th>Categoria</th>
-                <th>Data de criação</th>                        
+                <th>Data de criação</th>                           
             </tr>
         </thead>
-        <tbody>
+        <tbody align="center" class="align-middle">
         {% for jogo in lista %}
             <tr>
                 <td>{{ jogo.nome.title() }}</td>
@@ -46,7 +57,7 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>      
+    </table>       
     
 </section>
 {% endblock %}
