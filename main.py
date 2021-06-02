@@ -12,12 +12,15 @@ api = Api(app)
 
 @app.get("/sessao")
 def retornar_sessao():
-    return session.get("logado", "não logado")#Caso exista a chave "logado" ele irá retornar esse valor dentro da chave. Caso não exista a chave "logado" ele irá retornar "não logado"
+    #Caso exista a chave "logado" ele irá retornar esse valor dentro da chave. Caso não exista a chave "logado" ele irá retornar "não logado"
+    user = session.get('logado', 'não logado')
+
+    #Verifica se um admin que está logado
+    if(user == "não logado"):
+        user = session.get('admin', 'não logado')
     
-
+    return user
     
-
-
 @app.get("/")
 @app.get("/index")
 def index_page():
@@ -38,11 +41,16 @@ def autenticar():
 
 @app.get("/dashboard")
 def dashboard():
-    return render_template('dashboard.html', user = usuario.retornar_usuario(session['logado']))
+    return render_template('dashboard.html', user = usuario.retornar_usuario(retornar_sessao()))
+    
+
+@app.get("/experiencia")
+def experiencia():
+    return render_template('cad_experiencia.html', titulo = "Cadastrar Experiência")
 
 @app.get("/logout")
 def logout():
-    session["logado"] = None
+    session.clear()
     #Mensagem para avisar que saiu!
     return redirect(url_for("index_page"))
 

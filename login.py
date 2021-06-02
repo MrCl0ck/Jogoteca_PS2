@@ -30,16 +30,20 @@ def retornar_login(email: str):
 #Faz a autenticação do login e senha passados
 def autenticar(email:str, senha: str):
     base_de_dados = LoginJSON.ler(__banco_login)
-    base_de_dados = base_de_dados["logins"]
-    for login in base_de_dados:
+    
+    for login in base_de_dados["logins"]:
         if(login["email"] == email):
             if(login["senha"] == senha):
                 session['logado'] = email
                 return login
-            else:
-                return None
-        else:
-            return None
+    
+    for login in base_de_dados["admins"]:
+        if(login["email"] == email):
+            if(login["senha"] == senha):
+                session['admin'] = email
+                return login
+
+    return None
 
      
 #Criação e inserção de um login e senha no banco de dados

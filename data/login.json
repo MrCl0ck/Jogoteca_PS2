@@ -1,1 +1,4 @@
-{"logins": [{"email": "levip@gmail.com", "senha": "12323115"}, {"email": "levip123@gmail.com", "senha": "55555555"}]}
+{
+    "logins": [{"email": "levip@gmail.com", "senha": "12323115"}, {"email": "levip123@gmail.com", "senha": "55555555"}, {"email": "a@a.com.br", "senha": "151515"}],
+    "admins": [{"email":"admin@jogoteca.com.br", "senha": "jogo1ec477"}]
+}
