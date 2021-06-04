@@ -7,9 +7,6 @@
             <form class="form-group nav-link" action="{{ url_for('cadastrar_jogo_usuario_page') }}">
                 <button class="btn btn-primary">Adicionar Jogo</button>                
             </form>
-            <form class="form-group nav-link" action="{{ url_for('experiencia_page') }}">
-                <button class="btn btn-primary">Adicionar Experiência</button>                
-            </form>
             <form class="form-group nav-link" action="{{ url_for('index_page') }}">
                 <button class="btn btn-primary">Página Principal</button>                
             </form>
@@ -42,26 +39,30 @@
             </p>
         </section>  
         <section class="container">
-            <p><h3> Jogos Cadastrados: </h3></p>
-            <p><h4>TOP 5</h4></p>
+            <p><h3> Meus jogos: </h3></p>
             <table class="table table-striped table-responsive table-bordered">
-                <thead class="thead-default">
+                <thead align="center" class="thead-default align-middle">
                     <tr>
                         <th>Nome</th>
                         <th>Console</th>
-                        <th>Popularidade</th>
-                        <th>Categoria</th>
-                        <th>Data de criação</th>                        
+                        <th>Pontos</th>  
+                        <th>Tempo jogado</th>
+                        <th>Experiência</th>                    
                     </tr>
                 </thead>
-                <tbody>
+                <tbody align="center" class="align-middle">
                 {% for jogo in user["jogos"] %}
                     <tr>
-                        <td>{{ jogo.nome.title() }}</td>
-                        <td>{{ jogo.console }}</td>
-                        <td>{{ jogo.popularidade }}</td>
-                        <td>{{ jogo.categoria }}</td>
-                        <td>{{ jogo.data }}</td>
+                        <form method="POST" action="{{ url_for('experiencia_page') }}">
+                            <td><input name="nome" value="{{ jogo.nome }}" type="hidden">{{ jogo.nome.title() }}</td>
+                            <td>{{ jogo.console }}</td>
+                            <td>{{ jogo["experiencia"].pontos }}</td>
+                            <td>{{ jogo["experiencia"].tempo }}</td>
+                            <td class="col-auto">
+                                <button class="btn btn-primary"><strong><h4>+</h4></strong></button>
+                            </td>
+                            </form>
+                        </tr>
                     </tr>
                 {% endfor %}
                 </tbody>

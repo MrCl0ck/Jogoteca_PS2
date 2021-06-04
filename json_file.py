@@ -1,4 +1,4 @@
-import json
+import json, usuario
 
 class GeralJSON:
     def ler(caminho):
@@ -58,27 +58,29 @@ class UsuarioJSON:
         with open(caminho, 'r') as f:
             return json.load(f)
 
-    def escrever(usuario: dict, caminho):
+    def escrever(user: dict, caminho):
         #Caso a escolha seja acrescentar um usuário ao banco de dados
         banco_user = UsuarioJSON.ler(caminho)
         with open(caminho, 'w') as f:
-            banco_user['usuarios'].append(usuario.dict(include={"nome", "email", "data", "jogos", "nivel", "pontos"}))
+            banco_user['usuarios'].append(user.dict(include={"nome", "email", "data", "jogos", "nivel", "pontos"}))
             print(banco_user)
             return json.dump(banco_user, f)
         
-    def deletar(usuario: dict, caminho):
+    def deletar(user: dict, caminho):
         #Caso a escolha seja deletar um usuário do banco de dados
         banco_user = UsuarioJSON.ler(caminho)
-        banco_user['usuarios'].remove(usuario)
+        banco_user['usuarios'].remove(user)
         with open(caminho, 'w') as f:
             print(banco_user)
             return json.dump(banco_user, f)
 
-    def atualizar(usuario: dict, jogo, caminho):
+    def atualizar(user: dict, caminho):
+        #Lê o banco de dados, recupera o usuário a ser atualizado com o email e logo após exlcui esse registro antigo do usuário
+        #Após excluir o registro ele lê o banco e adicionar novamente com o usuário com informações novas
         banco_user = UsuarioJSON.ler(caminho)
-        banco_user['usuarios'].remove(usuario)
-        usuario["jogos"].append(jogo)
+        antigo = usuario.retornar_usuario(user["email"])
+        banco_user['usuarios'].remove(antigo)
         with open(caminho, 'w') as f:
-            banco_user['usuarios'].append(usuario)
+            banco_user['usuarios'].append(user)
             print(banco_user)
             return json.dump(banco_user, f)

@@ -1,7 +1,5 @@
-from datetime import datetime
-
 from flask.helpers import flash
-from json_file import JogosJSON, UsuarioJSON
+from json_file import JogosJSON
 from pydantic.main import BaseModel
 from fastapi import FastAPI
 import usuario
@@ -33,8 +31,11 @@ def retornar_jogo(nome: str):
     return None
 
 def add_jogo_usuario(jogo: dict, email: str):
+    #Recupero do banco o usuário para ser atualizado
+    #Adiciono a chave "jogos" o novo jogo e peço pra atualizar no banco de usuários
     user = usuario.retornar_usuario(email)
-    usuario.adicionar_jogo_usuario(user, jogo)
+    user["jogos"].append(jogo)
+    usuario.atualizar_usuario(user)
 
     flash("Jogo adicionado com sucesso!", "success")
 

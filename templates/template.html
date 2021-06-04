@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <title>Jogoteca PS2</title>
+    <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        {% for message in get_flashed_messages(category_filter=["success"]) %}
-        {% if message %}
-        <div class="alert alert-success fade">
-            <strong>{{ message }}</strong>
-        </div>
-        {% endif %}
-        {% endfor %}
+        {% with messages = get_flashed_messages(category_filter=["success"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                     <div class="alert alert-success fade">
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-        {% for message in get_flashed_messages(category_filter=["error"]) %}
-        {% if message %}
-        <div class="alert alert-danger fade">
-            <strong>{{ message }}</strong>
-        </div>
-        {% endif %}
-        {% endfor %}
+        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                     <div class="alert alert-danger fade">
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         
         <p></p>
         <h1>{{ titulo }}</h1>
@@ -33,6 +37,5 @@
         
         {% endblock %}
     </div>
-    
 </body>
 </html>

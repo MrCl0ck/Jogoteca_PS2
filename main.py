@@ -73,7 +73,11 @@ def cadastrar_jogo_usuario():
         "console": request.form["console"],
         "popularidade": float(request.form["popularidade"]),
         "categoria": request.form["categoria"],
-        "data": request.form["data"]
+        "data": request.form["data"],
+        "experiencia": {
+            "pontos": 0,
+            "tempo": 0
+        }
     }
     jogos.add_jogo_usuario(jogo,retornar_sessao())
 
@@ -101,13 +105,13 @@ def cadastrar_jogo():
     flash(res, "success")
     return redirect(url_for('dashboard'))
 
-@app.get("/cadastrar_experiencia")
+@app.post("/cadastrar_experiencia")
 def experiencia_page():
-    return render_template('cad_experiencia.html', titulo = "Cadastrar Experiência")
+    return render_template('cad_experiencia.html', titulo = "Cadastrar Experiência - {}".format(request.form["nome"].title()))
 
-@app.get("/autenticar_cadastro_experiencia")
+@app.post("/autenticar_cadastro_experiencia")
 def cadastrar_experiencia():
-    pass
+    usuario.adicionar_experiencia(request.form["nome"], request.form["pontos"], request.form["tempo"], retornar_sessao())
 
 @app.get("/logout")
 def logout():
