@@ -73,3 +73,12 @@ class UsuarioJSON:
         with open(caminho, 'w') as f:
             print(banco_user)
             return json.dump(banco_user, f)
+
+    def atualizar(usuario: dict, jogo, caminho):
+        banco_user = UsuarioJSON.ler(caminho)
+        banco_user['usuarios'].remove(usuario)
+        usuario["jogos"].append(jogo)
+        with open(caminho, 'w') as f:
+            banco_user['usuarios'].append(usuario)
+            print(banco_user)
+            return json.dump(banco_user, f)

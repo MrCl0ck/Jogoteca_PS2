@@ -31,7 +31,7 @@
             <p>
                 <label class="fw-bold">Jogo favorito: </label>
                 <p>
-                    {{ user["jogos"] }}, Exp: {{ user["jogos"].experiencia }}, Tempo jogado: {{ user["jogos"].tempo }} 
+                    Em testes...
                 </p>
             </p>
             <p>
@@ -55,9 +55,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for jogo in jogos %}
+                {% for jogo in user["jogos"] %}
                     <tr>
-                        <td>{{ jogo.nome }}</td>
+                        <td>{{ jogo.nome.title() }}</td>
                         <td>{{ jogo.console }}</td>
                         <td>{{ jogo.popularidade }}</td>
                         <td>{{ jogo.categoria }}</td>

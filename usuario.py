@@ -13,7 +13,7 @@ class Usuario(BaseModel):
     nome: str
     email: str
     data: str = str(datetime.now().date()) #Data atual
-    jogos: str = "Você não tem nenhum jogo adicionado!"
+    jogos: str = []
     nivel: str = 'Noob'
     pontos: int = 0
 
@@ -49,6 +49,14 @@ def listar_usuarios():
 def criar_usuario(nome: str, email: str):
     UsuarioJSON.escrever(Usuario(nome=nome, email=email),__banco_user)
     return "Usuário criado com sucesso!"
+
+def adicionar_jogo_usuario(user: Usuario, jogo):
+    #Deleta o usuário antigo do banco de dados, depois ele adiciona um jogo a lista de jogos existente.
+    #Após adicionar a lista ele escreve o usuário novamente no banco de dados
+    UsuarioJSON.atualizar(user, jogo,__banco_user)
+
+    return "Usuário atualizado com sucesso!"
+
 
 @app.delete("/private/users/{email}")
 def deletar_usuario(email: str):

@@ -1,7 +1,10 @@
 from datetime import datetime
-from json_file import JogosJSON
+
+from flask.helpers import flash
+from json_file import JogosJSON, UsuarioJSON
 from pydantic.main import BaseModel
 from fastapi import FastAPI
+import usuario
 
 app = FastAPI()
 
@@ -28,6 +31,15 @@ def retornar_jogo(nome: str):
                 return jogo #Retorna um dicionário contendo as informações do jogo
 
     return None
+
+def add_jogo_usuario(jogo: dict, email: str):
+    user = usuario.retornar_usuario(email)
+    usuario.adicionar_jogo_usuario(user, jogo)
+
+    flash("Jogo adicionado com sucesso!", "success")
+
+    return "Jogo adicionado com sucesso!"
+
 
 #Este método retorna vários dicionários, com jogos e suas informações em cada um
 def retornar_jogos():

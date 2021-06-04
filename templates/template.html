@@ -10,7 +10,7 @@
     <div class="container">
         {% for message in get_flashed_messages(category_filter=["success"]) %}
         {% if message %}
-        <div class="alert alert-success fade" role="success">
+        <div class="alert alert-success fade">
             <strong>{{ message }}</strong>
         </div>
         {% endif %}
@@ -18,7 +18,7 @@
 
         {% for message in get_flashed_messages(category_filter=["error"]) %}
         {% if message %}
-        <div class="alert alert-danger fade" role="danger">
+        <div class="alert alert-danger fade">
             <strong>{{ message }}</strong>
         </div>
         {% endif %}

@@ -64,11 +64,21 @@ def dashboard():
     
 @app.get("/cadastrar_jogo_usuario")
 def cadastrar_jogo_usuario_page():
-    return render_template('add_jogo_usuario.html', lista = jogos.retornar_jogos(), titulo="Adicionar Jogo a minha conta")
+    return render_template('add_jogo_usuario.html', user = usuario.retornar_usuario(retornar_sessao()), lista = jogos.retornar_jogos(), titulo="Adicionar Jogo a minha conta")
 
-@app.get("/autenticar_cadastrar_jogo_usuario")
+@app.post("/autenticar_cadastrar_jogo_usuario")
 def cadastrar_jogo_usuario():
-    pass
+    jogo = {
+        "nome": request.form["nome"],
+        "console": request.form["console"],
+        "popularidade": float(request.form["popularidade"]),
+        "categoria": request.form["categoria"],
+        "data": request.form["data"]
+    }
+    jogos.add_jogo_usuario(jogo,retornar_sessao())
+
+    return redirect(url_for('cadastrar_jogo_usuario_page'))
+
 
 @app.get("/admin/cadastrar_jogo")
 def cadastrar_jogo_page():

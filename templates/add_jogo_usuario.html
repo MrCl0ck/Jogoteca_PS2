@@ -20,18 +20,20 @@
         </thead>
         <tbody align="center" class="align-middle">
         {% for jogo in lista %}
+            {% if jogo not in user["jogos"] %}
             <tr>
-                <td>{{ jogo.nome.title() }}</td>
-                <td>{{ jogo.console }}</td>
-                <td>{{ jogo.popularidade }}</td>
-                <td>{{ jogo.categoria }}</td>
-                <td>{{ jogo.data }}</td>
+                <form method="POST" action="{{ url_for('cadastrar_jogo_usuario') }}">
+                <td><input name="nome" value="{{ jogo.nome }}" type="hidden">{{ jogo.nome.title() }}</td>
+                <td><input name="console" value="{{ jogo.console }}"type="hidden">{{ jogo.console }}</td>
+                <td><input name="popularidade" value={{ jogo.popularidade }} type="hidden">{{ jogo.popularidade }}</td>
+                <td><input name="categoria" value="{{ jogo.categoria }}" type="hidden">{{ jogo.categoria }}</td>
+                <td><input name="data" value="{{ jogo.data }}" type="hidden">{{ jogo.data }}</td>
                 <td class="col-auto">
-                    <form action="">
                         <button class="btn btn-primary"><strong><h4>+</h4></strong></button>
-                    </form>
-                </td>
+                    </td>
+                </form>
             </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table> 
