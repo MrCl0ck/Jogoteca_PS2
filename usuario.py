@@ -27,6 +27,17 @@ def retornar_usuario(email: str):
 
     return retornar_admin(email)
 
+def retornar_jogos_usuario(email: str):
+    usuario = retornar_usuario(email)
+    lista_de_jogos = []
+    for jogo in usuario["jogos"]:
+        for c,v in jogo.items():
+            if(c == "nome"):
+                lista_de_jogos.append(v)
+
+    return lista_de_jogos
+
+
 def retornar_admin(email: str):
     admins = UsuarioJSON.ler(__banco_user)
     admins = admins["admins"]

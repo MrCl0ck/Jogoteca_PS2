@@ -19,8 +19,10 @@
             </tr>
         </thead>
         <tbody align="center" class="align-middle">
-        {% for jogo in lista %}
-            {% if jogo not in user["jogos"] %}
+            {{user}}
+        {% for jogo in lista_total %}
+            {% if jogo.nome not in lista_usuario %}
+            <br>{{lista_usuario}}
             <tr>
                 <form method="POST" action="{{ url_for('cadastrar_jogo_usuario') }}">
                 <td><input name="nome" value="{{ jogo.nome }}" type="hidden">{{ jogo.nome.title() }}</td>

@@ -64,7 +64,8 @@ def dashboard():
     
 @app.get("/cadastrar_jogo_usuario")
 def cadastrar_jogo_usuario_page():
-    return render_template('add_jogo_usuario.html', user = usuario.retornar_usuario(retornar_sessao()), lista = jogos.retornar_jogos(), titulo="Adicionar Jogo a minha conta")
+    return render_template('add_jogo_usuario.html', user = usuario.retornar_usuario(retornar_sessao()), lista_total = jogos.retornar_jogos(), 
+    lista_usuario = usuario.retornar_jogos_usuario(retornar_sessao()),titulo="Adicionar Jogo a minha conta")
 
 @app.post("/autenticar_cadastrar_jogo_usuario")
 def cadastrar_jogo_usuario():
